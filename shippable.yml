@@ -4,35 +4,33 @@ python:
   - 3.4
 
 env:
-  global:
-    - FOO=FUBU
+  #global:
+    - secure: cXZQ2CHYe4A7mQEriUqWFlPNxTbf1A8it3DSsKsBCaReOJKJfhAjgLofAfnkghO+VeDrKe7m+UnqRrQQ5IBGRFa4i2O18i5WV8RdAoj95UIM/S4SJhtOxcinD+CW1vNa1euQK7thKd0MDZQLFURT51txF2elETNn7QT43myxaL8N+lpMCwQiK1bahODPMctsNVCBlE2Yzm6+0FPzn84oQPkQeTvvSnUFhxv3tjMcQLVKskzCLMM4JF/dpssT4x6SxkHFeHeMbokR/eXzABjQQuZef6BZ2PUtR2LZeGFY15hKhxK3483YZm2Dr+3be/dnd4bndWT+jzy63qYGnbF2Jw==
 
-  matrix:
-    - M1=ONE
+ # matrix:
+  #  - M1=ONE
 
 build:
-  pre_ci:
-    - docker build -t=shippabledocker/hitchcock4_sample_python .
+ # pre_ci:
+  #  - docker build -t=shippabledocker/hitchcock4_sample_python .
 
   pre_ci_boot:
-    image_name: shippabledocker/hitchcock4_sample_python
-    image_tag: latest
-    pull: false
+    image_name: drydock/u12pytpls
+    image_tag: tip
+    pull: true
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
 
   ci:
     - ps -eax
     - ls -al
 
-  post_ci:
-    - docker push shippabledocker/hitchcock4_sample_python
+  #post_ci:
+   # - docker push shippabledocker/hitchcock4_sample_python
 
 
 integrations:
   hub:
     - integrationName: ship-docker
       type: docker
-      branches: 
-        only:
-          - master
+      
    
